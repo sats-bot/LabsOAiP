@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>  
 #include <cstring>
 
 using namespace std;
@@ -18,30 +18,30 @@ int main()
 
 string Reverse(string source) 
 {
-    for (int i = 0; i < source.length() / 2; i++) {
-        Swap(source[i], source[source.length() - i - 1]);
-    }
+    for (int i = 0; i < source.length() / 2; i++) {       // проходим до середины массива и просто меняем местами элемент с симметричным ему относительно середины
+        Swap(source[i], source[source.length() - i - 1]); // например в "12345" при i = 0 меняется 1 и 5 (т. к. их индексы 0 и длина строке(5) - 1 - 0 = 4)
+    }                                                     // псоле увеливаем индекс на 1 и меняем 2 и 4 (индексы 1 и 5 - 1 - 1 = 3) и т. д.
 
-    return source;
+    return source;                                        // возвращаем новую строку
 }
 
 string ReverseRecursion(string source, int index)
 {
-    if (index > source.length() / 2)
+    if (index > source.length() / 2)                             // проверка на остановку рекурсии, если индекс достиг середины, то дальше менять на надо ибо зачем, получим изначальную строку
     {
         return source;
     }
     else
     {
-        Swap(source[index], source[source.length() - index - 1]);
-        index++;
-        return ReverseRecursion(source, index);
+        Swap(source[index], source[source.length() - index - 1]); // меняем как и при обычном цикле
+        index++;                                                  // делаем шаг вперед
+        return ReverseRecursion(source, index);                   // и заново вызываем эту же функцию, только с увеличенным индексом, и происходит по сути тоже самое что и с обычным циклом
     }
 }
 
-void Swap(char& first, char& second)
+void Swap(char& first, char& second)     // функция обмена, передаем два адреса элементов. адрес передается для изменения значения, которое находится в этом адресе
 {
-    char temp = first;
+    char temp = first;                   // обычная пузырьковая замена
     first = second;
     second = temp;
 }
