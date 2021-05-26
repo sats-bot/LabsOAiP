@@ -3,17 +3,29 @@
 
 using namespace std;
 
-string Reverse(string, int);
+string ReverseRecursion(string, int);
+void Swap(char&, char&);
+string Reverse(string);
 
 int main()
 {
     string source = "12345";
-    source = Reverse(source, 0);
-    cout << source;
+    cout << ReverseRecursion(source, 0) << endl;
+    string source1 = "Hello, world!";
+    cout << Reverse(source1) << endl;
     return 0;
 }
 
-string Reverse(string source, int index)
+string Reverse(string source) 
+{
+    for (int i = 0; i < source.length() / 2; i++) {
+        Swap(source[i], source[source.length() - i - 1]);
+    }
+
+    return source;
+}
+
+string ReverseRecursion(string source, int index)
 {
     if (index > source.length() / 2)
     {
@@ -21,10 +33,15 @@ string Reverse(string source, int index)
     }
     else
     {
-        char temp = source[index];
-        source[index] = source[source.length() - index - 1];
-        source[source.length() - index - 1] = temp;
+        Swap(source[index], source[source.length() - index - 1]);
         index++;
-        return Reverse(source, index);
+        return ReverseRecursion(source, index);
     }
+}
+
+void Swap(char& first, char& second)
+{
+    char temp = first;
+    first = second;
+    second = temp;
 }
